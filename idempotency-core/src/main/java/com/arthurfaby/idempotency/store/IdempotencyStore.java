@@ -4,7 +4,6 @@ import com.arthurfaby.idempotency.store.model.RequestFingerprint;
 import com.arthurfaby.idempotency.store.model.Reservation;
 import com.arthurfaby.idempotency.store.model.StoredRecord;
 import com.arthurfaby.idempotency.store.model.StoredResponse;
-
 import java.time.Duration;
 import java.util.Optional;
 

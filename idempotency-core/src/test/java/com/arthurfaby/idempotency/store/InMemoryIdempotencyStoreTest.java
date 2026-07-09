@@ -2,8 +2,8 @@ package com.arthurfaby.idempotency.store;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import com.arthurfaby.idempotency.store.model.Reservation;
 import com.arthurfaby.idempotency.store.model.RequestFingerprint;
+import com.arthurfaby.idempotency.store.model.Reservation;
 import com.arthurfaby.idempotency.store.model.StoredRecord;
 import com.arthurfaby.idempotency.store.model.StoredResponse;
 import java.time.Duration;
@@ -48,8 +48,8 @@ class InMemoryIdempotencyStoreTest {
     void reserveAfterCompleteWithSameRequestReplaysStoredResponse() {
         var store = new InMemoryIdempotencyStore();
         store.reserve("key-1", fingerprint, TTL);
-        var stored = new StoredResponse(
-                201, Map.of("Content-Type", List.of("application/json")), "{\"id\":1}".getBytes());
+        var stored =
+                new StoredResponse(201, Map.of("Content-Type", List.of("application/json")), "{\"id\":1}".getBytes());
         store.complete("key-1", stored);
 
         Reservation reservation = store.reserve("key-1", fingerprint, TTL);
@@ -82,8 +82,7 @@ class InMemoryIdempotencyStoreTest {
         clock.advance(Duration.ofMinutes(2)); // past the TTL
 
         assertThat(store.find("key-1")).isEmpty();
-        assertThat(store.reserve("key-1", fingerprint, TTL).outcome())
-                .isEqualTo(Reservation.Outcome.NEW);
+        assertThat(store.reserve("key-1", fingerprint, TTL).outcome()).isEqualTo(Reservation.Outcome.NEW);
     }
 
     @Test

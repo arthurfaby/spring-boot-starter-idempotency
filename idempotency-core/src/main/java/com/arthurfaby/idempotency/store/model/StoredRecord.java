@@ -7,8 +7,7 @@ import java.time.Instant;
  * states explicit and mutually exclusive — no nullable "response" field and no
  * separate state enum to keep in sync.
  */
-public sealed interface StoredRecord
-        permits StoredRecord.InProgress, StoredRecord.Completed {
+public sealed interface StoredRecord permits StoredRecord.InProgress, StoredRecord.Completed {
 
     /** Identity of the request that reserved the key. */
     RequestFingerprint fingerprint();
@@ -22,12 +21,9 @@ public sealed interface StoredRecord
     }
 
     /** The request is being processed; no response yet. */
-    record InProgress(RequestFingerprint fingerprint, Instant expiresAt)
-            implements StoredRecord {
-    }
+    record InProgress(RequestFingerprint fingerprint, Instant expiresAt) implements StoredRecord {}
 
     /** The request finished; its response is stored for replay. */
     record Completed(RequestFingerprint fingerprint, StoredResponse response, Instant expiresAt)
-            implements StoredRecord {
-    }
+            implements StoredRecord {}
 }

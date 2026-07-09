@@ -4,7 +4,6 @@ import com.arthurfaby.idempotency.store.model.RequestFingerprint;
 import com.arthurfaby.idempotency.store.model.Reservation;
 import com.arthurfaby.idempotency.store.model.StoredRecord;
 import com.arthurfaby.idempotency.store.model.StoredResponse;
-
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -49,12 +48,12 @@ public class InMemoryIdempotencyStore implements IdempotencyStore {
             }
             // Otherwise decide from the existing record's type (exhaustive switch).
             switch (existing) {
-                case StoredRecord.InProgress inProgress ->
-                        verdict.set(Reservation.inProgress(inProgress));
-                case StoredRecord.Completed completed -> verdict.set(
-                        completed.fingerprint().equals(fingerprint)
-                                ? Reservation.replay(completed)
-                                : Reservation.mismatch(completed));
+                case StoredRecord.InProgress inProgress -> verdict.set(Reservation.inProgress(inProgress));
+                case StoredRecord.Completed completed ->
+                    verdict.set(
+                            completed.fingerprint().equals(fingerprint)
+                                    ? Reservation.replay(completed)
+                                    : Reservation.mismatch(completed));
             }
             return existing; // untouched
         });
