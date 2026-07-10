@@ -30,4 +30,7 @@ public interface IdempotencyStore {
 
     /** Returns the (non-expired) record for the key, if any. */
     Optional<StoredRecord> find(String key);
+
+    /** Releases an in-progress reservation so the request can be retried after a failure. */
+    void release(String key);
 }

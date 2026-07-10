@@ -85,4 +85,9 @@ public class InMemoryIdempotencyStore implements IdempotencyStore {
         }
         return Optional.of(record);
     }
+
+    @Override
+    public void release(String key) {
+        records.computeIfPresent(key, (k, existing) -> existing instanceof StoredRecord.InProgress ? null : existing);
+    }
 }
