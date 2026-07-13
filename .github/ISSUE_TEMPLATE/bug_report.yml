@@ -1,0 +1,32 @@
+name: Bug report
+description: Report a problem with the starter
+labels: [bug]
+body:
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the bug, and what you expected instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps (ideally a code snippet or curl) to reproduce.
+    validations:
+      required: true
+  - type: input
+    id: starter-version
+    attributes:
+      label: Starter version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: spring-boot-version
+    attributes:
+      label: Spring Boot version
+      placeholder: "3.5.x"
+    validations:
+      required: true
