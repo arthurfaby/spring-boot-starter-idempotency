@@ -41,6 +41,12 @@ class RequestFingerprintTest {
         assertThat(fingerprint.hash()).hasSize(64).matches("[0-9a-f]+");
     }
 
+    @Test
+    void nullBodyIsAllowed() {
+        var fingerprint = RequestFingerprint.of("GET", "/health", null);
+        assertThat(fingerprint.hash()).hasSize(64);
+    }
+
     private static byte[] body(String json) {
         return json.getBytes(StandardCharsets.UTF_8);
     }

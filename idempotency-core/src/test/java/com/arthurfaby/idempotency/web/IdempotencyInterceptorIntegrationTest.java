@@ -61,6 +61,32 @@ class IdempotencyInterceptorIntegrationTest {
         assertThat(controller.invocations()).isEqualTo(1);
     }
 
+    @Test
+    void withoutKeyHeaderTheHandlerRunsEveryTime() throws Exception {
+        for (int i = 0; i < 2; i++) {
+            mockMvc.perform(post("/payments")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"amount\":100}"))
+                    .andExpect(status().isOk());
+        }
+        assertThat(controller.invocations()).isEqualTo(2); // no key → runs each time
+    }
+
+    @Test
+    void customTtlEndpointReplaysOnRetry() throws Exception {
+        String key = "ttl-key";
+        String body = "{\"amount\":5}";
+        for (int i = 0; i < 2; i++) {
+            mockMvc.perform(post("/with-ttl")
+                            .header("Idempotency-Key", key)
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content(body))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.paymentId").value("payment-1"));
+        }
+        assertThat(controller.invocations()).isEqualTo(1); // replayed → runs once
+    }
+
     @SpringBootConfiguration
     @EnableAutoConfiguration
     @Import(PaymentController.class)
@@ -74,6 +100,13 @@ class IdempotencyInterceptorIntegrationTest {
         @PostMapping("/payments")
         @Idempotent
         Map<String, Object> pay(@RequestBody Map<String, Object> body) {
+            int number = counter.incrementAndGet();
+            return Map.of("paymentId", "payment-" + number, "amount", body.get("amount"));
+        }
+
+        @PostMapping("/with-ttl")
+        @Idempotent(ttl = "2h")
+        Map<String, Object> withCustomTtl(@RequestBody Map<String, Object> body) {
             int number = counter.incrementAndGet();
             return Map.of("paymentId", "payment-" + number, "amount", body.get("amount"));
         }

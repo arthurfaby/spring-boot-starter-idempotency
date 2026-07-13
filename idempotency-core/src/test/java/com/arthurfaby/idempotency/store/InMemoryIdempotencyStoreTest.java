@@ -116,4 +116,35 @@ class InMemoryIdempotencyStoreTest {
 
         assertThat(newCount).hasValue(1);
     }
+
+    @Test
+    void releaseRemovesAnInProgressKey() {
+        var store = new InMemoryIdempotencyStore();
+        store.reserve("key-1", fingerprint, TTL);
+
+        store.release("key-1");
+
+        assertThat(store.find("key-1")).isEmpty();
+        assertThat(store.reserve("key-1", fingerprint, TTL).outcome()).isEqualTo(Reservation.Outcome.NEW);
+    }
+
+    @Test
+    void releaseKeepsACompletedKey() {
+        var store = new InMemoryIdempotencyStore();
+        store.reserve("key-1", fingerprint, TTL);
+        store.complete("key-1", new StoredResponse(200, Map.of(), new byte[0]));
+
+        store.release("key-1");
+
+        assertThat(store.find("key-1")).get().isInstanceOf(StoredRecord.Completed.class);
+    }
+
+    @Test
+    void completeOnUnknownKeyIsNoOp() {
+        var store = new InMemoryIdempotencyStore();
+
+        store.complete("ghost", new StoredResponse(200, Map.of(), new byte[0]));
+
+        assertThat(store.find("ghost")).isEmpty();
+    }
 }
