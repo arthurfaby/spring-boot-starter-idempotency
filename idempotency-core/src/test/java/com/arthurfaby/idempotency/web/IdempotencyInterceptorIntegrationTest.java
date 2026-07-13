@@ -6,7 +6,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.arthurfaby.idempotency.annotation.Idempotent;
-import com.arthurfaby.idempotency.config.IdempotencyConfiguration;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
@@ -64,7 +63,7 @@ class IdempotencyInterceptorIntegrationTest {
 
     @SpringBootConfiguration
     @EnableAutoConfiguration
-    @Import({IdempotencyConfiguration.class, PaymentController.class})
+    @Import(PaymentController.class)
     static class TestApplication {}
 
     @RestController

@@ -5,7 +5,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.arthurfaby.idempotency.annotation.Idempotent;
-import com.arthurfaby.idempotency.config.IdempotencyConfiguration;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -87,7 +86,7 @@ class IdempotencyErrorCasesTest {
 
     @SpringBootConfiguration
     @EnableAutoConfiguration
-    @Import({IdempotencyConfiguration.class, TestController.class})
+    @Import(TestController.class)
     static class TestApplication {}
 
     @RestController
