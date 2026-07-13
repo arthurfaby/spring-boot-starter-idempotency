@@ -6,6 +6,8 @@ All notable changes to this project are documented here. The format is based on
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-13
+
 ### Added
 
 - `@Idempotent` annotation to make `POST`/`PATCH` endpoints idempotent via the `Idempotency-Key` header.
@@ -15,4 +17,5 @@ All notable changes to this project are documented here. The format is based on
 - Spring Boot auto-configuration with configuration properties (`idempotency.*`) and conditional beans.
 - Runnable `sample-app` demonstrating the behaviour.
 
-[Unreleased]: https://github.com/arthurfaby/spring-boot-starter-idempotency/commits/main
+[Unreleased]: https://github.com/arthurfaby/spring-boot-starter-idempotency/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/arthurfaby/spring-boot-starter-idempotency/releases/tag/v0.1.0
