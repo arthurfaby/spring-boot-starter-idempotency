@@ -1,0 +1,5 @@
+idempotency:
+  default-ttl: 1h
+
+server:
+  port: 8080

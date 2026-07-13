@@ -12,9 +12,11 @@
     <name>Idempotency Starter (parent)</name>
     <description>Spring Boot starter that makes mutating endpoints idempotent via the IETF Idempotency-Key header.</description>
 
+
     <modules>
         <module>idempotency-core</module>
         <module>spring-boot-starter-idempotency</module>
+        <module>sample-app</module>
     </modules>
 
     <properties>
