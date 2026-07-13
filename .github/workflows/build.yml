@@ -23,3 +23,9 @@ jobs:
 
       - name: Build
         run: ./mvnw -B -ntp verify
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./idempotency-core/target/site/jacoco/jacoco.xml

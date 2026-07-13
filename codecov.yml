@@ -1,0 +1,11 @@
+coverage:
+  round: down
+  precision: 1
+
+# The demo app is not part of the library's coverage.
+ignore:
+  - "sample-app"
+
+comment:
+  layout: "reach, diff, files"
+  require_changes: true

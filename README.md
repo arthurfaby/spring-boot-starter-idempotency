@@ -1,6 +1,7 @@
 # spring-boot-starter-idempotency
 
 [![build](https://github.com/arthurfaby/spring-boot-starter-idempotency/actions/workflows/build.yml/badge.svg)](https://github.com/arthurfaby/spring-boot-starter-idempotency/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/arthurfaby/spring-boot-starter-idempotency/graph/badge.svg)](https://codecov.io/gh/arthurfaby/spring-boot-starter-idempotency)
 [![Maven Central](https://img.shields.io/maven-central/v/com.arthurfaby/spring-boot-starter-idempotency)](https://central.sonatype.com/artifact/com.arthurfaby/spring-boot-starter-idempotency)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Java](https://img.shields.io/badge/Java-21%2B-orange.svg)](https://adoptium.net/)
