@@ -7,12 +7,13 @@
     <parent>
         <groupId>com.arthurfaby</groupId>
         <artifactId>idempotency-parent</artifactId>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
     </parent>
 
     <artifactId>spring-boot-starter-idempotency</artifactId>
     <name>Spring Boot Starter :: Idempotency</name>
     <description>Meta-package: brings idempotency-core and its runtime dependencies.</description>
+    <url>https://github.com/arthurfaby/spring-boot-starter-idempotency</url>
 
     <dependencies>
         <dependency>

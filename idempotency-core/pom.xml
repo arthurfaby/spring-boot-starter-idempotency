@@ -7,12 +7,13 @@
     <parent>
         <groupId>com.arthurfaby</groupId>
         <artifactId>idempotency-parent</artifactId>
-        <version>0.1.1</version>
+        <version>0.1.2</version>
     </parent>
 
     <artifactId>idempotency-core</artifactId>
     <name>Idempotency Core</name>
     <description>Core logic: SPI, in-memory store, web interception, auto-configuration.</description>
+    <url>https://github.com/arthurfaby/spring-boot-starter-idempotency</url>
 
     <dependencies>
         <dependency>
